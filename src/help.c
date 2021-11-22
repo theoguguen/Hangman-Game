@@ -20,17 +20,19 @@ int is_there_wrong_character(char *word)
 
 void wrong(void)
 {
-    printf("Veuillez préciser un mot, ");
-    printf("ou mettre le groupe de mots entre guillemets.\n");
+    printf("Please, input a word or put ");
+    printf("a word group into quotes.\n");
+    printf("No special characters are admitted\n");
+    printf("Type ./hangman -h for more informations\n");
     exit(0);
 }
 
 void help(void)
 {
-    printf("\t--- Bienvenue sur le jeu du pendu ---\n\n");
+    printf("\t--- Welcome to the Hangman Game ! ---\n\n");
     printf("\tDESCRIPTION\n");
-    printf("Le Pendu est un jeu consistant à trouver un mot en devinant quelles sont les lettres qui le composent.\n\n");
-    printf("\tUTILISATION\n");
-    printf("./pendu MOT -t ESSAIS_MAX (Par défaut 10)\n");
+    printf("The Hangman Game is a game of finding a word by guessing which are the letters that compose it.\n\n");
+    printf("\nUSAGE\n");
+    printf("./pendu WORD -t MAX_TRIES (Par défaut 10)\n");
     exit(0);
 }

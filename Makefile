@@ -17,7 +17,7 @@ OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	=	-W -Wall -Wextra -I includes/
 
-NAME	=	pendu
+NAME	=	hangman
 
 all:	$(NAME)
 

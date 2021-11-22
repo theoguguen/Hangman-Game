@@ -56,7 +56,7 @@ char *check_already_used(char *used_letter, char *buff, int *new_letter_pos, int
 {
     for (size_t i = 0; used_letter[i]; i++) {
         if (used_letter[i] == buff[0]) {
-            printf("Vous avez déjà utilisé cette lettre ! Essayez-en une autre.\n");
+            printf("You've already used this letter. Try another one !\n");
             *state = 1;
             return used_letter;
         }
@@ -68,7 +68,7 @@ char *check_already_used(char *used_letter, char *buff, int *new_letter_pos, int
 
 static void print_used_letters(char *used_letters)
 {
-    printf("Lettres déjà utilisées: [%c", used_letters[0]);
+    printf("Used letters: [%c", used_letters[0]);
     for(size_t i = 1; used_letters[i]; i++)
         printf(", %c", used_letters[i]);
     printf("]\n");
@@ -83,19 +83,19 @@ static void game(pendu_t *pendu)
     char *used_letter = malloc(sizeof(char) * 26);
 
     system("clear");
-    printf("\t--- Le jeu du pendu ---\n\n");
+    printf("\t--- The Hangman Game ---\n\n");
     while (winning_condition(pendu) == 0) {
         state = 0;
-        printf("Mot à deviner : \t%s (%d lettres)\n", pendu->hidden, pendu->length);
-        printf("Nombre d'essais restant : \t%d essais\n", (pendu->max_try - pendu->tries));
+        printf("Word to guess : \t%s (%d letters)\n", pendu->hidden, pendu->length);
+        printf("Tries left : \t%d try(ies)\n", (pendu->max_try - pendu->tries));
         print_used_letters(used_letter);
-        printf("\nProposez une lettre ou un mot : ");
+        printf("\nSuggest a letter or a word : ");
         if (getline(&buff, &s, stdin) == -1)
             break;
         if (strlen(buff) == 2)
             used_letter = check_already_used(used_letter, buff, &new_letter_pos, &state);
         exec_loop(pendu, buff, state);
-        printf("\n\t-----------------------\n\n");
+        printf("\n\t------------------------\n\n");
     }
     result(pendu);
     free(buff);
