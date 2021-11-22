@@ -18,9 +18,19 @@ int is_there_wrong_character(char *word)
     return 0;
 }
 
-void help(void)
+void wrong(void)
 {
     printf("Veuillez préciser un mot, ");
     printf("ou mettre le groupe de mots entre guillemets.\n");
+    exit(0);
+}
+
+void help(void)
+{
+    printf("\t--- Bienvenue sur le jeu du pendu ---\n\n");
+    printf("\tDESCRIPTION\n");
+    printf("Le Pendu est un jeu consistant à trouver un mot en devinant quelles sont les lettres qui le composent.\n\n");
+    printf("\tUTILISATION\n");
+    printf("./pendu MOT -t ESSAIS_MAX (Par défaut 10)\n");
     exit(0);
 }

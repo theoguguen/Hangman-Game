@@ -15,8 +15,10 @@
 #include <unistd.h>
 #include <stdbool.h>
 
+void wrong(void);
+
 void help(void);
 
-void pendu(char *word);
+void pendu(char *word, int nb);
 
 #endif

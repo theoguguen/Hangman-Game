@@ -12,6 +12,8 @@ static void exec_loop(pendu_t *pendu, char *buff, int state)
     int found = 0;
     size_t i = 0;
 
+    if (buff[0] == '\n')
+        return;
     if (strlen(buff) > 2) {
         while (buff[i]){
             if (buff[i] == pendu->word[i] || buff[i] == '\n')
@@ -61,7 +63,7 @@ static void game(pendu_t *pendu)
     char *used_letter = malloc(sizeof(char) * 26);
 
     system("clear");
-    printf("\t--- Le jeu du pendu ! ---\n\n");
+    printf("\t--- Le jeu du pendu ---\n\n");
     while (winning_condition(pendu) == 0) {
         state = 0;
         printf("Mot à deviner : \t%s (%d lettres)\n", pendu->hidden, pendu->length);
@@ -77,10 +79,16 @@ static void game(pendu_t *pendu)
     free(buff);
 }
 
-void pendu(char *word)
+void pendu(char *word, int nb)
 {
     pendu_t *pendu = malloc(sizeof(pendu_t));
-    pendu = init_struct(word, pendu);
+
+    if (nb <= 0) {
+        free(pendu);
+        wrong();
+    }
+    pendu = init_struct(word, pendu, nb);
     game(pendu);
     free(pendu);
+    exit(0);
 }

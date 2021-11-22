@@ -23,7 +23,7 @@ int winning_condition(pendu_t *pendu);
 
 void result(pendu_t *pendu);
 
-pendu_t *init_struct(char *word, pendu_t *pendu);
+pendu_t *init_struct(char *word, pendu_t *pendu, int nb);
 
 int is_there_wrong_character(char *word);
 

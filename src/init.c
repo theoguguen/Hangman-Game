@@ -9,7 +9,7 @@
 
 static char *word_hidden(char *word)
 {
-    char *temp = malloc(sizeof(char) * strlen(word));
+    char *temp = malloc(sizeof(char) * strlen(word) + 1);
 
     temp = strcpy(temp, word);
     for (size_t i = 0; temp[i]; i++) {
@@ -32,13 +32,12 @@ static int count_letter(char *word)
     return nb;
 }
 
-pendu_t *init_struct(char *word, pendu_t *pendu)
+pendu_t *init_struct(char *word, pendu_t *pendu, int nb)
 {
     pendu->length = count_letter(word);
     pendu->word = word;
-    pendu->alphabet = "abcdefghijklmnopqrstuvwxyz";
     pendu->tries = 0;
     pendu->hidden = word_hidden(word);
-    pendu->max_try = 10;
+    pendu->max_try = nb;
     return pendu;
 }
