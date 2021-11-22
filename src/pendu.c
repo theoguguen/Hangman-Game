@@ -54,6 +54,7 @@ static void exec_loop(pendu_t *pendu, char *buff, int state)
 
 char *check_already_used(char *used_letter, char *buff, int *new_letter_pos, int *state)
 {
+    my_strlowcase(buff);
     for (size_t i = 0; used_letter[i]; i++) {
         if (used_letter[i] == buff[0]) {
             printf("You've already used this letter. Try another one !\n");
@@ -83,9 +84,9 @@ static void game(pendu_t *pendu)
     char *used_letter = malloc(sizeof(char) * 26);
 
     system("clear");
-    printf("\t--- The Hangman Game ---\n\n");
     while (winning_condition(pendu) == 0) {
         state = 0;
+        printf("\t--- The Hangman Game ---\n\n");
         printf("Word to guess : \t%s (%d letters)\n", pendu->hidden, pendu->length);
         printf("Tries left : \t%d try(ies)\n", (pendu->max_try - pendu->tries));
         print_used_letters(used_letter);
@@ -95,10 +96,11 @@ static void game(pendu_t *pendu)
         if (strlen(buff) == 2)
             used_letter = check_already_used(used_letter, buff, &new_letter_pos, &state);
         exec_loop(pendu, buff, state);
-        printf("\n\t------------------------\n\n");
+        system("clear");
     }
     result(pendu);
     free(buff);
+    free(used_letter);
 }
 
 void pendu(char *word, int nb)
