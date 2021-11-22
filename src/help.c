@@ -30,9 +30,9 @@ void wrong(void)
 void help(void)
 {
     printf("\t--- Welcome to the Hangman Game ! ---\n\n");
-    printf("\tDESCRIPTION\n");
-    printf("The Hangman Game is a game of finding a word by guessing which are the letters that compose it.\n\n");
-    printf("\nUSAGE\n");
-    printf("./pendu WORD -t MAX_TRIES (Par défaut 10)\n");
+    printf("    DESCRIPTION\n");
+    printf("  The Hangman Game is a game of finding a word by \nguessing which are the letters that compose it.\n\n");
+    printf("    USAGE\n");
+    printf("  ./pendu WORD -t MAX_TRIES (Default: 10).\n");
     exit(0);
 }
