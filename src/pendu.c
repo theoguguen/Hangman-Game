@@ -7,11 +7,23 @@
 
 #include "pendu.h"
 
+static char *my_strlowcase(char *str)
+{
+    for (size_t i = 0; str[i] != '\0'; i++)
+        if (str[i] >= 'A' && str[i] <= 'Z')
+            str[i] += 32;
+    return str;
+}
+
 static void exec_loop(pendu_t *pendu, char *buff, int state)
 {
     int found = 0;
     size_t i = 0;
+    char *temp = malloc(sizeof(char) * strlen(pendu->word) + 1);
 
+    temp = strcpy(temp, pendu->word);
+    my_strlowcase(temp);
+    my_strlowcase(buff);
     if (buff[0] == '\n')
         return;
     if (strlen(buff) > 2) {
@@ -30,8 +42,8 @@ static void exec_loop(pendu_t *pendu, char *buff, int state)
     }
     else {
         for (int i = 0; pendu->hidden[i]; i++) {
-            if (pendu->word[i] == buff[0] && strlen(buff) == 2) {
-                pendu->hidden[i] = buff[0];
+            if (temp[i] == buff[0] && strlen(buff) == 2) {
+                pendu->hidden[i] = pendu->word[i];
                 found = 1;
             }
         }
@@ -54,6 +66,14 @@ char *check_already_used(char *used_letter, char *buff, int *new_letter_pos, int
     return used_letter;
 }
 
+static void print_used_letters(char *used_letters)
+{
+    printf("Lettres déjà utilisées: [%c", used_letters[0]);
+    for(size_t i = 1; used_letters[i]; i++)
+        printf(", %c", used_letters[i]);
+    printf("]\n");
+}
+
 static void game(pendu_t *pendu)
 {
     char *buff = NULL;
@@ -67,13 +87,15 @@ static void game(pendu_t *pendu)
     while (winning_condition(pendu) == 0) {
         state = 0;
         printf("Mot à deviner : \t%s (%d lettres)\n", pendu->hidden, pendu->length);
-        printf("Nombre d'essais restant ; \t%d essais\n\n", (pendu->max_try - pendu->tries));
-        printf("Proposez une lettre ou un mot : ");
+        printf("Nombre d'essais restant : \t%d essais\n", (pendu->max_try - pendu->tries));
+        print_used_letters(used_letter);
+        printf("\nProposez une lettre ou un mot : ");
         if (getline(&buff, &s, stdin) == -1)
             break;
         if (strlen(buff) == 2)
             used_letter = check_already_used(used_letter, buff, &new_letter_pos, &state);
         exec_loop(pendu, buff, state);
+        printf("\n\t-----------------------\n\n");
     }
     result(pendu);
     free(buff);
