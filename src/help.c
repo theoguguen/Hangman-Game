@@ -33,6 +33,6 @@ void help(void)
     printf("    DESCRIPTION\n");
     printf("  The Hangman Game is a game of finding a word by \nguessing which are the letters that compose it.\n\n");
     printf("    USAGE\n");
-    printf("  ./pendu WORD -t MAX_TRIES (Default: 10).\n");
+    printf("  ./hangman WORD -t MAX_TRIES (Default: 10).\n");
     exit(0);
 }

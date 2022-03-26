@@ -27,4 +27,6 @@ pendu_t *init_struct(char *word, pendu_t *pendu, int nb);
 
 int is_there_wrong_character(char *word);
 
+void print_game(pendu_t *pendu, char *used_letter);
+
 #endif

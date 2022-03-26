@@ -7,7 +7,7 @@
 
 #include "pendu.h"
 
-static int  is_num(char *str)
+static int is_num(char *str)
 {
     for (size_t i = 0; str[i]; i++) {
         if (str[i] < 48 || str[i] > 57)

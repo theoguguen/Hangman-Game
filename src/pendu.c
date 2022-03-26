@@ -52,7 +52,7 @@ static void exec_loop(pendu_t *pendu, char *buff, int state)
         pendu->tries += 1;
 }
 
-char *check_already_used(char *used_letter, char *buff, int *new_letter_pos, int *state)
+static char *check_already_used(char *used_letter, char *buff, int *new_letter_pos, int *state)
 {
     my_strlowcase(buff);
     for (size_t i = 0; used_letter[i]; i++) {
@@ -67,14 +67,6 @@ char *check_already_used(char *used_letter, char *buff, int *new_letter_pos, int
     return used_letter;
 }
 
-static void print_used_letters(char *used_letters)
-{
-    printf("Used letters: [%c", used_letters[0]);
-    for(size_t i = 1; used_letters[i]; i++)
-        printf(", %c", used_letters[i]);
-    printf("]\n");
-}
-
 static void game(pendu_t *pendu)
 {
     char *buff = NULL;
@@ -86,11 +78,7 @@ static void game(pendu_t *pendu)
     system("clear");
     while (winning_condition(pendu) == 0) {
         state = 0;
-        printf("\t--- The Hangman Game ---\n\n");
-        printf("Word to guess : \t%s (%d letters)\n", pendu->hidden, pendu->length);
-        printf("Tries left : \t%d try(ies)\n", (pendu->max_try - pendu->tries));
-        print_used_letters(used_letter);
-        printf("\nSuggest a letter or a word : ");
+        print_game(pendu, used_letter);
         if (getline(&buff, &s, stdin) == -1)
             break;
         if (strlen(buff) == 2)

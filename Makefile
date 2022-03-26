@@ -12,6 +12,7 @@ SRC	=	$(SRCDIR)/main.c		\
 		$(SRCDIR)/pendu.c		\
 		$(SRCDIR)/end_game.c	\
 		$(SRCDIR)/init.c		\
+		$(SRCDIR)/print.c		\
 
 OBJ	=	$(SRC:.c=.o)
 
